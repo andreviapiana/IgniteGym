@@ -2,14 +2,13 @@ import { StatusBar } from 'react-native'
 import { NativeBaseProvider } from 'native-base'
 import { THEME } from './src/theme'
 
-import { SignUp } from '@screens/SignUp'
-
 import {
   useFonts,
   Roboto_400Regular,
   Roboto_700Bold,
 } from '@expo-google-fonts/roboto'
 
+import { Routes } from '@routes/index'
 import { Loading } from '@components/Loading'
 
 export default function App() {
@@ -22,7 +21,7 @@ export default function App() {
         backgroundColor="transparent"
         translucent
       />
-      {fontsLoaded ? <SignUp /> : <Loading />}
+      {fontsLoaded ? <Routes /> : <Loading />}
     </NativeBaseProvider>
   )
 }

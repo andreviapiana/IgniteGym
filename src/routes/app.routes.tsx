@@ -24,6 +24,7 @@ export function AppRoutes() {
     <Navigator
       screenOptions={{
         headerShown: false,
+        tabBarShowLabel: false,
       }}
     >
       <Screen name="home" component={Home} />

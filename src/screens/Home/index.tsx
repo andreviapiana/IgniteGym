@@ -25,9 +25,10 @@ export function Home() {
         )}
         horizontal
         showsHorizontalScrollIndicator={false}
-        _contentContainerStyle={{ px: 8 }}
-        my={10}
-        maxH={10}
+        contentContainerStyle={{
+          paddingHorizontal: 10,
+          paddingVertical: 10,
+        }}
       />
 
       <VStack px={8}>

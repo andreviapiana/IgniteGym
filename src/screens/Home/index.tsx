@@ -1,19 +1,16 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { VStack, Image } from 'native-base'
+
+import BackgroundImg from '@assets/background.png'
 
 export function Home() {
   return (
-    <View style={styles.container}>
-      <Text>Home</Text>
-    </View>
+    <VStack flex={1} bg="gray.700">
+      <Image
+        source={BackgroundImg}
+        alt="Pessoas treinando"
+        resizeMode="contain"
+        position="absolute"
+      />
+    </VStack>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-})

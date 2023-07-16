@@ -2,7 +2,7 @@ import { StatusBar } from 'react-native'
 import { NativeBaseProvider } from 'native-base'
 import { THEME } from 'src/theme'
 
-import { Home } from '@screens/Home'
+import { SignIn } from '@screens/SignIn'
 
 import {
   useFonts,
@@ -22,7 +22,7 @@ export default function App() {
         backgroundColor="transparent"
         translucent
       />
-      {fontsLoaded ? <Home /> : <Loading />}
+      {fontsLoaded ? <SignIn /> : <Loading />}
     </NativeBaseProvider>
   )
 }

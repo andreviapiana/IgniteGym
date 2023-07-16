@@ -4,6 +4,8 @@ import React from 'react'
 import BackgroundImg from '@assets/background.png'
 import LogoSvg from '@assets/logo.svg'
 
+import { Input } from '@components/Input'
+
 export function SignIn() {
   return (
     <VStack flex={1} bg="gray.700">
@@ -25,6 +27,9 @@ export function SignIn() {
         <Heading color="gray.100" fontSize="xl" mb={6} fontFamily="heading">
           Acesse a conta
         </Heading>
+
+        <Input placeholder="E-mail" />
+        <Input placeholder="Senha" />
       </Center>
     </VStack>
   )

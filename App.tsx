@@ -1,6 +1,6 @@
 import { StatusBar } from 'react-native'
 import { NativeBaseProvider } from 'native-base'
-import { THEME } from 'src/theme'
+import { THEME } from './src/theme'
 
 import { SignIn } from '@screens/SignIn'
 

@@ -1,8 +1,8 @@
+import { ExerciseCard } from '@components/ExerciseCard'
 import { Group } from '@components/Group'
 import { HomeHeader } from '@components/HomeHeader'
-import { HStack, Heading, VStack, Text } from 'native-base'
+import { HStack, Heading, VStack, Text, FlatList } from 'native-base'
 import { useState } from 'react'
-import { FlatList } from 'react-native'
 
 export function Home() {
   const [groupSelected, setGroupSelected] = useState('Costa')
@@ -25,10 +25,11 @@ export function Home() {
         )}
         horizontal
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{
-          paddingHorizontal: 10,
-          paddingVertical: 10,
+        _contentContainerStyle={{
+          px: 8,
         }}
+        my={10}
+        maxH={10}
       />
 
       <VStack px={8}>
@@ -41,6 +42,8 @@ export function Home() {
             4
           </Text>
         </HStack>
+        <ExerciseCard />
+        <ExerciseCard />
       </VStack>
     </VStack>
   )

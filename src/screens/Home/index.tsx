@@ -5,8 +5,13 @@ import { HStack, Heading, VStack, Text, FlatList } from 'native-base'
 import { useState } from 'react'
 
 export function Home() {
-  const [groupSelected, setGroupSelected] = useState('Costa')
-
+  const [groupSelected, setGroupSelected] = useState('Costas')
+  const [exercises, setExercises] = useState([
+    'Puxada frontal',
+    'Remada curvada',
+    'Remada unilateral',
+    'Levantamento terras',
+  ])
   const [groups, setGroups] = useState(['Costas', 'Bíceps', 'Tríceps', 'Ombro'])
 
   return (
@@ -32,18 +37,26 @@ export function Home() {
         maxH={10}
       />
 
-      <VStack px={8}>
+      <VStack flex={1} px={8}>
         <HStack justifyContent="space-between" mb={5}>
           <Heading color="gray.200" fontSize="md">
             Exercícios
           </Heading>
 
           <Text color="gray.200" fontSize="sm">
-            4
+            {exercises.length}
           </Text>
         </HStack>
-        <ExerciseCard />
-        <ExerciseCard />
+
+        <FlatList
+          data={exercises}
+          keyExtractor={(item) => item}
+          renderItem={({ item }) => <ExerciseCard />}
+          showsVerticalScrollIndicator={false}
+          _contentContainerStyle={{
+            paddingBottom: 20,
+          }}
+        />
       </VStack>
     </VStack>
   )

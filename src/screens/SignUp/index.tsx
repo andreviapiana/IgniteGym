@@ -11,7 +11,7 @@ import { Controller, useForm } from 'react-hook-form'
 
 export function SignUp() {
   // Armazenando os Inputs //
-  const { control } = useForm()
+  const { control, handleSubmit } = useForm()
 
   // Navegando de Volta p/ a tela anterior //
   const navigation = useNavigation()
@@ -21,7 +21,9 @@ export function SignUp() {
   }
 
   // Função de SignUp //
-  function handleSignUp() {}
+  function handleSignUp(data: any) {
+    console.log({ data })
+  }
 
   return (
     <ScrollView
@@ -94,11 +96,16 @@ export function SignUp() {
                 secureTextEntry
                 onChangeText={onChange}
                 value={value}
+                onSubmitEditing={handleSubmit(handleSignUp)}
+                returnKeyType="send"
               />
             )}
           />
 
-          <Button title="Criar e acessar" onPress={handleSignUp} />
+          <Button
+            title="Criar e acessar"
+            onPress={handleSubmit(handleSignUp)}
+          />
         </Center>
 
         <Button

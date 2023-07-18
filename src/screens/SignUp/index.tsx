@@ -7,12 +7,30 @@ import { Input } from '@components/Input'
 import { Button } from '@components/Button'
 
 import { useNavigation } from '@react-navigation/native'
+import { useState } from 'react'
 
 export function SignUp() {
+  // Armazenando os Inputs //
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [passwordConfirm, setPasswordConfirm] = useState('')
+
+  // Navegando de Volta p/ a tela anterior //
   const navigation = useNavigation()
 
   function handleGoBack() {
     navigation.goBack()
+  }
+
+  // Função de SignUp //
+  function handleSignUp() {
+    console.log({
+      name,
+      email,
+      password,
+      passwordConfirm,
+    })
   }
 
   return (
@@ -42,16 +60,26 @@ export function SignUp() {
             Crie sua conta
           </Heading>
 
-          <Input placeholder="Nome" />
+          <Input placeholder="Nome" onChangeText={setName} />
 
           <Input
             placeholder="E-mail"
             keyboardType="email-address"
             autoCapitalize="none"
+            onChangeText={setEmail}
           />
-          <Input placeholder="Senha" secureTextEntry />
+          <Input
+            placeholder="Senha"
+            secureTextEntry
+            onChangeText={setPassword}
+          />
+          <Input
+            placeholder="Confirmar a Senha"
+            secureTextEntry
+            onChangeText={setPasswordConfirm}
+          />
 
-          <Button title="Criar e acessar" />
+          <Button title="Criar e acessar" onPress={handleSignUp} />
         </Center>
 
         <Button

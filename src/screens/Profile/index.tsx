@@ -6,7 +6,7 @@ import {
   Text,
   Heading,
 } from 'native-base'
-import { TouchableOpacity } from 'react-native'
+import { Alert, TouchableOpacity } from 'react-native'
 import { useState } from 'react'
 
 import { ScreenHeader } from '@components/ScreenHeader'
@@ -44,7 +44,11 @@ export function Profile() {
         const photoInfo = await FileSystem.getInfoAsync(
           photoSelected.assets[0].uri,
         )
-        console.log(photoInfo)
+        if (photoInfo.exists && photoInfo.size / 1024 / 1024 > 5) {
+          return Alert.alert(
+            'Essa imagem é muito grande. Escolha uma de até 5MB.',
+          )
+        }
 
         setUserPhoto(photoSelected.assets[0].uri)
       }

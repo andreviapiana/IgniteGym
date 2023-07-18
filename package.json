@@ -24,7 +24,8 @@
     "react-native-screens": "~3.20.0",
     "react-native-svg": "13.4.0",
     "react-native-svg-transformer": "^1.0.0",
-    "expo-image-picker": "~14.1.1"
+    "expo-image-picker": "~14.1.1",
+    "expo-file-system": "~15.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

@@ -20,6 +20,7 @@ import { AuthNavigatorRoutesProps } from '@routes/auth.routes'
 import { Controller, useForm } from 'react-hook-form'
 import { useAuth } from '@hooks/useAuth'
 import { AppError } from '@utils/AppError'
+import { useState } from 'react'
 
 type FormData = {
   email: string
@@ -28,7 +29,12 @@ type FormData = {
 
 export function SignIn() {
   const { signIn } = useAuth()
+
+  // Notificação Toast //
   const toast = useToast()
+
+  // Loading //
+  const [isLoading, setIsLoading] = useState(false)
 
   // Navegando para a tela SignUp //
   const navigation = useNavigation<AuthNavigatorRoutesProps>()
@@ -47,6 +53,7 @@ export function SignIn() {
   // Função de SignIn //
   async function handleSignIn({ email, password }: FormData) {
     try {
+      setIsLoading(true)
       await signIn(email, password)
     } catch (error) {
       const isAppError = error instanceof AppError
@@ -60,6 +67,7 @@ export function SignIn() {
         placement: 'top',
         bgColor: 'red.500',
       })
+      setIsLoading(false)
     }
   }
 
@@ -119,7 +127,11 @@ export function SignIn() {
             )}
           />
 
-          <Button title="Acessar" onPress={handleSubmit(handleSignIn)} />
+          <Button
+            title="Acessar"
+            onPress={handleSubmit(handleSignIn)}
+            isLoading={isLoading}
+          />
         </Center>
 
         <Center mt={24}>

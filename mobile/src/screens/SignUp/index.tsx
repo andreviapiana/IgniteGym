@@ -12,6 +12,8 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { api } from '@services/api'
+import axios from 'axios'
+import { Alert } from 'react-native'
 
 type FormDataProps = {
   name: string
@@ -52,8 +54,14 @@ export function SignUp() {
 
   // Função de SignUp //
   async function handleSignUp({ name, email, password }: FormDataProps) {
-    const response = await api.post('/users', { name, email, password })
-    console.log(response.data)
+    try {
+      const response = await api.post('/users', { name, email, password })
+      console.log(response.data)
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        Alert.alert(error.response?.data.message)
+      }
+    }
   }
 
   return (

@@ -28,8 +28,8 @@ export function Home() {
   // Navegação para a tela Exercise //
   const navigation = useNavigation<AppNavigatorRoutesProps>()
 
-  function handleOpenExerciseDetails() {
-    navigation.navigate('exercise')
+  function handleOpenExerciseDetails(exerciseId: string) {
+    navigation.navigate('exercise', { exerciseId })
   }
 
   // Fazendo o Fetch dos Grupos //
@@ -125,7 +125,10 @@ export function Home() {
             data={exercises}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
-              <ExerciseCard onPress={handleOpenExerciseDetails} data={item} />
+              <ExerciseCard
+                onPress={() => handleOpenExerciseDetails(item.id)}
+                data={item}
+              />
             )}
             showsVerticalScrollIndicator={false}
             _contentContainerStyle={{

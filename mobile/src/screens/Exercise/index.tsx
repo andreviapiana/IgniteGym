@@ -8,7 +8,7 @@ import {
   Box,
   ScrollView,
 } from 'native-base'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import { AppNavigatorRoutesProps } from '@routes/app.routes'
 import { TouchableOpacity } from 'react-native'
 import { Feather } from '@expo/vector-icons'
@@ -18,12 +18,22 @@ import RepetitionsSvg from '@assets/repetitions.svg'
 
 import { Button } from '@components/Button'
 
+type RouteParamsProps = {
+  exerciseId: string
+}
+
 export function Exercise() {
+  // Navegando de volta //
   const navigation = useNavigation<AppNavigatorRoutesProps>()
 
   function handleGoBack() {
     navigation.goBack()
   }
+
+  // Recebendo o ID pela rota //
+  const route = useRoute()
+
+  const { exerciseId } = route.params as RouteParamsProps
 
   return (
     <VStack flex={1}>

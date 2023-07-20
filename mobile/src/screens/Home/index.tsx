@@ -15,7 +15,7 @@ import { ExerciseDTO } from '@dtos/ExerciseDTO'
 import { Loading } from '@components/Loading'
 
 export function Home() {
-  const [groupSelected, setGroupSelected] = useState('bíceps')
+  const [groupSelected, setGroupSelected] = useState('antebraço')
   const [exercises, setExercises] = useState<ExerciseDTO[]>([])
   const [groups, setGroups] = useState<string[]>([])
 

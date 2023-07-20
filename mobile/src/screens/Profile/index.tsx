@@ -21,6 +21,9 @@ import * as FileSystem from 'expo-file-system'
 import { useAuth } from '@hooks/useAuth'
 import { Controller, useForm } from 'react-hook-form'
 
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
+
 const PHOTO_SIZE = 33
 
 type FormDataProps = {
@@ -30,6 +33,10 @@ type FormDataProps = {
   old_password: string
   confirm_password: string
 }
+
+const profileSchema = yup.object({
+  name: yup.string().required('Informe o nome'),
+})
 
 export function Profile() {
   const [photoIsLoading, setPhotoIsLoading] = useState(false)
@@ -42,11 +49,16 @@ export function Profile() {
 
   // Armazenando o User e os Valores do Formulário //
   const { user } = useAuth()
-  const { control, handleSubmit } = useForm<FormDataProps>({
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormDataProps>({
     defaultValues: {
       name: user.name,
       email: user.email,
     },
+    resolver: yupResolver(profileSchema),
   })
 
   async function handleUserPhotoSelected() {
@@ -132,6 +144,7 @@ export function Profile() {
                 placeholder="Nome"
                 onChangeText={onChange}
                 value={value}
+                errorMessage={errors.name?.message}
               />
             )}
           />
@@ -183,6 +196,7 @@ export function Profile() {
                 placeholder="Nova senha"
                 secureTextEntry
                 onChangeText={onChange}
+                errorMessage={errors.password?.message}
               />
             )}
           />
@@ -196,6 +210,7 @@ export function Profile() {
                 placeholder="Confirme a nova senha"
                 secureTextEntry
                 onChangeText={onChange}
+                errorMessage={errors.confirm_password?.message}
               />
             )}
           />

@@ -18,8 +18,9 @@ const api = axios.create({
 }) as APIInstanceProps
 
 const failedQueued: Array<PromiseType> = []
+let isRefreshing = false
 
-api.registerInterceptTokenManager = (singOut) => {
+api.registerInterceptTokenManager = (signOut) => {
   const interceptTokenManager = api.interceptors.response.use(
     (response) => response,
     async (requestError) => {
@@ -31,12 +32,32 @@ api.registerInterceptTokenManager = (singOut) => {
           const { refresh_token } = await storageAuthTokenGet()
 
           if (!refresh_token) {
-            singOut()
+            signOut()
             return Promise.reject(requestError)
           }
+
+          const originalRequestConfig = requestError.config
+
+          if (isRefreshing) {
+            return new Promise((resolve, reject) => {
+              failedQueued.push({
+                onSuccess: (token: string) => {
+                  originalRequestConfig.headers = {
+                    Authorization: `Bearer ${token}`,
+                  }
+                  resolve(api(originalRequestConfig))
+                },
+                onFailure: (error: AxiosError) => {
+                  reject(error)
+                },
+              })
+            })
+          }
+
+          isRefreshing = true
         }
 
-        singOut()
+        signOut()
       }
 
       if (requestError.response && requestError.response.data) {

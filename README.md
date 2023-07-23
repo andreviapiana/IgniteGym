@@ -25,7 +25,7 @@ ___
 ## 🎨 Layout
 Imagens da aplicação são vistas abaixo:
 
-<img width="1920" alt="Cover" src="https://github.com/andreviapiana/DailyDiet/assets/106932234/58f77ba5-d785-48ba-b11d-64f7eef74b01">
+![Capa](https://github.com/andreviapiana/IgniteGym/assets/106932234/d7579d03-88a4-435f-a6fc-22da1c22e25f)
 
 ___
 
@@ -37,7 +37,7 @@ As seguintes tecnologias foram empregadas na criação deste projeto:
 - [TypeScript](https://www.typescriptlang.org/)
 - [Phosphor Icons](https://phosphoricons.com/)
 - [ESLint](https://eslint.org/)
-- [Styled Components](https://styled-components.com/docs/basics)
+- [NativeBase](https://nativebase.io/)
 - [Async Storage](https://reactnative.dev/docs/asyncstorage)
 - [React Navigation](https://reactnavigation.org/)
 - [React Navigation Native Stack](https://reactnavigation.org/docs/native-stack-navigator/)

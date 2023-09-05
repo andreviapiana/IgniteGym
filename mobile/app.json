@@ -31,12 +31,16 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.rocketseat/ignitegym"
-    },    
+    },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.anonymous.IgniteGym"
     },
     "web": {
       "favicon": "./assets/favicon.png"

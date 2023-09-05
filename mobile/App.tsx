@@ -13,6 +13,11 @@ import { Loading } from '@components/Loading'
 
 import { AuthContextProvider } from '@contexts/AuthContext'
 
+import OneSignal from 'react-native-onesignal'
+import { REACT_APP_ONE_SIGNAL_APP_ID } from '@env'
+
+OneSignal.setAppId(String(REACT_APP_ONE_SIGNAL_APP_ID))
+
 export default function App() {
   const [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold })
 

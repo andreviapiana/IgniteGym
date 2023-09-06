@@ -15,7 +15,7 @@ import OneSignal, {
 import { useEffect, useState } from 'react'
 
 const linking = {
-  prefixes: ['IgniteGym://', 'com.rocketseat.igniteshoes://'],
+  prefixes: ['IgniteGym://', 'com.rocketseat.ignitegym://'],
   config: {
     screens: {
       exercise: {

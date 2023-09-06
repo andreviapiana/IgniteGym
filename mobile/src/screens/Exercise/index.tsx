@@ -25,7 +25,10 @@ import { AppError } from '@utils/AppError'
 import { api } from '@services/api'
 import { Loading } from '@components/Loading'
 
-import { tagLastExerciseHistory } from '../../notifications/notificationsTags'
+import {
+  tagLastExerciseHistory,
+  tagLastExerciseHistoryTime,
+} from '../../notifications/notificationsTags'
 
 type RouteParamsProps = {
   exerciseId: string
@@ -87,6 +90,7 @@ export function Exercise() {
       await api.post('/history', { exercise_id: exerciseId })
 
       tagLastExerciseHistory(exercise.name)
+      tagLastExerciseHistoryTime()
 
       toast.show({
         title: 'Parabéns! Exercício registrado no seu histórico.',

@@ -14,6 +14,20 @@ import OneSignal, {
 } from 'react-native-onesignal'
 import { useEffect, useState } from 'react'
 
+const linking = {
+  prefixes: ['IgniteGym://', 'com.rocketseat.igniteshoes://'],
+  config: {
+    screens: {
+      exercise: {
+        path: 'exercise/:exerciseId',
+        parse: {
+          exerciseId: (exerciseId: string) => exerciseId,
+        },
+      },
+    },
+  },
+}
+
 export function Routes() {
   const [notification, setNotification] = useState<OSNotification>()
 
@@ -42,7 +56,7 @@ export function Routes() {
 
   return (
     <Box flex={1} bg="gray.700">
-      <NavigationContainer theme={theme}>
+      <NavigationContainer theme={theme} linking={linking}>
         {user.id ? <AppRoutes /> : <AuthRoutes />}
 
         {notification?.title && (

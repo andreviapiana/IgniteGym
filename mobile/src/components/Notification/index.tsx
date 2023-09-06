@@ -7,16 +7,29 @@ import {
   Pressable,
 } from 'native-base'
 import { Ionicons } from '@expo/vector-icons'
+import { OSNotification } from 'react-native-onesignal'
 import { useNavigation } from '@react-navigation/native'
 
 type Props = {
-  title: string
+  data: OSNotification
   onClose: () => void
 }
 
-export function Notification({ title, onClose }: Props) {
+type AditionalDataProps = {
+  route: 'exercise'
+  exercise_id?: string
+}
+
+export function Notification({ data, onClose }: Props) {
+  const { navigate } = useNavigation()
+
   function handleOnPress() {
-    onClose()
+    const { route, exercise_id } = data.additionalData as AditionalDataProps
+
+    if (route === 'exercise' && exercise_id) {
+      navigate('exercise', { exerciseId: exercise_id })
+      onClose()
+    }
   }
 
   return (
@@ -39,7 +52,7 @@ export function Notification({ title, onClose }: Props) {
         />
 
         <Text fontSize="md" color="black" flex={1}>
-          {title}
+          {data.title}
         </Text>
 
         <IconButton

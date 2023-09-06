@@ -44,13 +44,14 @@ export function Routes() {
     <Box flex={1} bg="gray.700">
       <NavigationContainer theme={theme}>
         {user.id ? <AppRoutes /> : <AuthRoutes />}
+
+        {notification?.title && (
+          <Notification
+            data={notification}
+            onClose={() => setNotification(undefined)}
+          />
+        )}
       </NavigationContainer>
-      {notification?.title && (
-        <Notification
-          title={'notification.title'}
-          onClose={() => setNotification(undefined)}
-        />
-      )}
     </Box>
   )
 }

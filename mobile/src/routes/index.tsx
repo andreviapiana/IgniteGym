@@ -6,12 +6,33 @@ import { AppRoutes } from './app.routes'
 
 import { useAuth } from '@hooks/useAuth'
 import { Loading } from '@components/Loading'
+import { Notification } from '@components/Notification'
+
+import OneSignal, {
+  NotificationReceivedEvent,
+  OSNotification,
+} from 'react-native-onesignal'
+import { useEffect, useState } from 'react'
 
 export function Routes() {
+  const [notification, setNotification] = useState<OSNotification>()
+
   const { colors } = useTheme()
 
   const theme = DefaultTheme
   theme.colors.background = colors.gray[700]
+
+  useEffect(() => {
+    const unsubscribe = OneSignal.setNotificationWillShowInForegroundHandler(
+      (notificationRecivedEvent: NotificationReceivedEvent) => {
+        const response = notificationRecivedEvent.getNotification()
+
+        setNotification(response)
+      },
+    )
+
+    return () => unsubscribe
+  }, [])
 
   const { user, isLoadingUserStorageData } = useAuth()
 
@@ -24,6 +45,12 @@ export function Routes() {
       <NavigationContainer theme={theme}>
         {user.id ? <AppRoutes /> : <AuthRoutes />}
       </NavigationContainer>
+      {notification?.title && (
+        <Notification
+          title={'notification.title'}
+          onClose={() => setNotification(undefined)}
+        />
+      )}
     </Box>
   )
 }

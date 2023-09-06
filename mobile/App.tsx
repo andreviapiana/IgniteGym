@@ -24,13 +24,22 @@ OneSignal.promptForPushNotificationsWithUserResponse()
 export default function App() {
   const [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold })
 
-useEffect(() => {
-  const unsubscribe = OneSignal.setNotificationOpenedHandler(() => {
-    console.log('Notificação aberta')
-  })
+  useEffect(() => {
+    const unsubscribe = OneSignal.setNotificationOpenedHandler((response) => {
+      const { actionId } = response.action as any
 
-  return () => unsubscribe
-}, [])
+      switch (actionId) {
+        case '1':
+          return console.log('Sim')
+        case '2':
+          return console.log('Não')
+        default:
+          return console.log('Não foi clicado em botão de ação')
+      }
+    })
+
+    return () => unsubscribe
+  }, [])
 
   return (
     <NativeBaseProvider theme={THEME}>

@@ -14,6 +14,8 @@ import {
   storageAuthTokenSave,
 } from '@storage/storageAuthToken'
 
+import { tagUserInfo } from '../notifications/notificationsTags'
+
 export type AuthContextDataProps = {
   user: UserDTO
   signIn: (email: string, password: string) => Promise<void>
@@ -120,6 +122,11 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
       subscribe()
     }
   }, [])
+
+  // useEffect da Criação de Tags com Nome e Email que monitora o Email e cria quando aparece um novo //
+  useEffect(() => {
+    tagUserInfo({ userName: user.name, email: user.email })
+  }, [user.name])
 
   return (
     <AuthContext.Provider

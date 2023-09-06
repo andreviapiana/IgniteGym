@@ -11,3 +11,7 @@ export function tagUserInfo({ userName, email }: addTagsProps) {
     user_email: email,
   })
 }
+
+export function tagLastExerciseHistory(exercise: string) {
+  OneSignal.sendTag('last_exercise', exercise)
+}

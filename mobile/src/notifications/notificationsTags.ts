@@ -22,3 +22,7 @@ export function tagLastExerciseHistoryTime() {
     Math.floor(Date.now() / 1000).toString(),
   )
 }
+
+export function tagWeeklyExercisesAmount(amount: number) {
+  OneSignal.sendTag('weekly_exercises_amount', amount.toString())
+}

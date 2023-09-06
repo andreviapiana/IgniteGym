@@ -1,16 +1,27 @@
 import { Heading, SectionList, VStack, Text, useToast } from 'native-base'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import { HistoryCard } from '@components/HistoryCard'
 import { ScreenHeader } from '@components/ScreenHeader'
 import { Loading } from '@components/Loading'
 
-import { useFocusEffect } from '@react-navigation/native'
+import { useFocusEffect, useRoute } from '@react-navigation/native'
 import { api } from '@services/api'
 import { AppError } from '@utils/AppError'
 import { HistoryByDayDTO } from '@dtos/HistoryByDayDTO'
 
+import { tagWeeklyExercisesAmount } from '../../notifications/notificationsTags'
+
+type RouteParamsProps = {
+  createWeekExercisesAmount?: boolean
+}
+
 export function History() {
+  // Recebendo o createWeekExercisesAmount pela Rota p/ Disparar o useEffect //
+  const route = useRoute()
+
+  const { createWeekExercisesAmount } = route.params as RouteParamsProps
+
   // Loading //
   const [isLoading, setIsLoading] = useState(true)
 
@@ -47,6 +58,20 @@ export function History() {
       fetchHistory()
     }, []),
   )
+
+  useEffect(() => {
+    if (createWeekExercisesAmount && exercises) {
+      const amount = exercises.flatMap((day) => {
+        const days = day.data.filter(
+          (exercise) =>
+            new Date(exercise.created_at).getMonth() === new Date().getMonth(),
+        )
+        return days
+      }).length
+
+      tagWeeklyExercisesAmount(amount)
+    }
+  }, [exercises, createWeekExercisesAmount])
 
   return (
     <VStack flex={1}>

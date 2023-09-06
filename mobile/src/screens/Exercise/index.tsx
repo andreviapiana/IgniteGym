@@ -98,7 +98,7 @@ export function Exercise() {
         bgColor: 'green.500',
       })
 
-      navigation.navigate('history')
+      navigation.navigate('history', { createWeekExercisesAmount: true })
     } catch (error) {
       const isAppError = error instanceof AppError
       const title = isAppError

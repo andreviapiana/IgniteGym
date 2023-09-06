@@ -21,7 +21,7 @@ type AppRoutes = {
   }
   profile: undefined
   history: {
-    createWeekExercisesAmount: boolean
+    createWeekExercisesAmount?: boolean
   }
 }
 

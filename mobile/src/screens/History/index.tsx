@@ -20,7 +20,7 @@ export function History() {
   // Recebendo o createWeekExercisesAmount pela Rota p/ Disparar o useEffect //
   const route = useRoute()
 
-  const { createWeekExercisesAmount } = route.params as RouteParamsProps
+  const params = route.params as RouteParamsProps
 
   // Loading //
   const [isLoading, setIsLoading] = useState(true)
@@ -60,7 +60,7 @@ export function History() {
   )
 
   useEffect(() => {
-    if (createWeekExercisesAmount && exercises) {
+    if (params?.createWeekExercisesAmount && exercises) {
       const amount = exercises.flatMap((day) => {
         const days = day.data.filter(
           (exercise) =>
@@ -71,7 +71,7 @@ export function History() {
 
       tagWeeklyExercisesAmount(amount)
     }
-  }, [exercises, createWeekExercisesAmount])
+  }, [exercises, params])
 
   return (
     <VStack flex={1}>
